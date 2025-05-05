@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Notification;
+import com.example.demo.model.entity.Notification;
 import com.example.demo.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

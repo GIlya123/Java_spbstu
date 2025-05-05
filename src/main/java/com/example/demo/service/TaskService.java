@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Task;
+import com.example.demo.model.dto.TaskDto;
+import com.example.demo.model.entity.Task;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,7 @@ public interface TaskService {
 
     List<Task> getPendingTasks(String userId);
 
-    Task createTask(Task task);
+    Task createTask(TaskDto task);
 
     void markTaskAsDeleted(UUID taskId);
 }

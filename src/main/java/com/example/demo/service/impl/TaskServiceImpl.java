@@ -1,7 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.TaskRepository;
-import com.example.demo.model.Task;
+import com.example.demo.model.dto.TaskDto;
+import com.example.demo.model.entity.Task;
 import com.example.demo.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task createTask(Task task) {
+    public Task createTask(TaskDto dto) {
+        Task task = new Task();
         task.setId(UUID.randomUUID());
+        task.setUserId(dto.getUserId());
+        task.setTitle(dto.getTitle());
+        task.setTargetDate(dto.getTargetDate());
         task.setCreatedAt(LocalDateTime.now());
         task.setCompleted(false);
         task.setDeleted(false);

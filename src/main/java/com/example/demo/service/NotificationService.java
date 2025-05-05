@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Notification;
+import com.example.demo.model.entity.Notification;
 
 import java.util.List;
 

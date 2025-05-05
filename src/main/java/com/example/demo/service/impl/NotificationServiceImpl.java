@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.NotificationRepository;
-import com.example.demo.model.Notification;
+import com.example.demo.model.entity.Notification;
 import com.example.demo.service.NotificationService;
 import org.springframework.stereotype.Service;
 

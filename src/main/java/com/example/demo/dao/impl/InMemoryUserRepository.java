@@ -1,7 +1,7 @@
 package com.example.demo.dao.impl;
 
 import com.example.demo.dao.UserRepository;
-import com.example.demo.model.User;
+import com.example.demo.model.entity.User;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,14 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        users.put(user.getUsername(), user);
+        User existingUser = users.get(user.getUsername());
+
+        if (existingUser == null) {
+            users.put(user.getUsername(), user);
+        } else {
+            throw new IllegalStateException("User exists: " + user.getUsername());
+        }
+
         return user;
     }
 

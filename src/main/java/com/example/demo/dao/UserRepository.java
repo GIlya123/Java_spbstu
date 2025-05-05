@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.User;
+import com.example.demo.model.entity.User;
 
 public interface UserRepository {
 

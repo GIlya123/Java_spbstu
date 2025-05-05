@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
+import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.entity.User;
 import com.example.demo.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +22,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return new ResponseEntity<>(userService.register(user), HttpStatus.CREATED);
+    public ResponseEntity<User> register(@Valid @RequestBody UserDto dto) {
+        return new ResponseEntity<>(userService.register(dto), HttpStatus.CREATED);
     }
 
     @GetMapping("/login")

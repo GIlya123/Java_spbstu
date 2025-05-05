@@ -1,7 +1,7 @@
 package com.example.demo.dao.impl;
 
 import com.example.demo.dao.TaskRepository;
-import com.example.demo.model.Task;
+import com.example.demo.model.entity.Task;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
@@ -25,8 +25,7 @@ public class InMemoryTaskRepository implements TaskRepository {
 
     @Override
     public List<Task> findAllByUserId(String userId, boolean includeDeleted) {
-        return tasks.values()
-                    .stream()
+        return tasks.values().stream()
                     .filter(t -> t.getUserId().equals(userId) && (includeDeleted || !t.isDeleted()))
                     .collect(Collectors.toList());
     }

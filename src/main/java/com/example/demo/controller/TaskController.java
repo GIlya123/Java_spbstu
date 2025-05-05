@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Task;
+import com.example.demo.model.dto.TaskDto;
+import com.example.demo.model.entity.Task;
 import com.example.demo.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +40,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        return new ResponseEntity<>(taskService.createTask(task), HttpStatus.CREATED);
+    public ResponseEntity<Task> createTask(@Valid @RequestBody TaskDto dto) {
+        return new ResponseEntity<>(taskService.createTask(dto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

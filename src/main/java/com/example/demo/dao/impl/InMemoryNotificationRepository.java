@@ -1,7 +1,7 @@
 package com.example.demo.dao.impl;
 
 import com.example.demo.dao.NotificationRepository;
-import com.example.demo.model.Notification;
+import com.example.demo.model.entity.Notification;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
