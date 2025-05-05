@@ -1,4 +1,4 @@
-package com.example.demo.dao.impl;
+package com.example.demo.dao.inmemory;
 
 import com.example.demo.dao.NotificationRepository;
 import com.example.demo.model.entity.Notification;
