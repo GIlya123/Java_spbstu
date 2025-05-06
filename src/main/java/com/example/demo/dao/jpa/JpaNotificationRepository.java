@@ -5,6 +5,7 @@ import com.example.demo.model.entity.Notification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,5 +24,11 @@ public class JpaNotificationRepository implements NotificationRepository {
     @Override
     public List<Notification> findPendingByUserId(String userId) {
         return jpaRepo.findByUserIdAndNotRead(userId);
+    }
+
+    @Override
+    @Transactional
+    public void save(Notification notification) {
+        jpaRepo.save(notification);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.configuration.KafkaConfig;
 import com.example.demo.dao.TaskRepository;
+import com.example.demo.messaging.Producer;
 import com.example.demo.model.dto.TaskDto;
 import com.example.demo.model.entity.Task;
 import com.example.demo.service.TaskService;
@@ -20,8 +22,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
+    private final Producer producer;
     private final TaskRepository taskRepository;
 
+    /**
+     * @return все задачи пользователя
+     */
     @Override
     @Transactional(readOnly = true)
     @Cacheable(value = "tasks", key = "#userId")
@@ -30,6 +36,9 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findAllByUserId(userId, true);
     }
 
+    /**
+     * @return активные/незавершенные задачи пользователя
+     */
     @Override
     @Transactional(readOnly = true)
     @Cacheable(value = "tasks-pending", key = "#userId")
@@ -39,7 +48,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional
     @CacheEvict(value = {"tasks", "tasks-pending"}, allEntries = true)
     public Task createTask(TaskDto dto) {
         Task task = new Task();
@@ -50,7 +58,11 @@ public class TaskServiceImpl implements TaskService {
         task.setCreatedAt(LocalDateTime.now());
         task.setCompleted(false);
         task.setDeleted(false);
-        return taskRepository.save(task);
+        task = taskRepository.save(task);
+
+        producer.send(KafkaConfig.TASK_CREATED_TOPIC, task.getUserId(), task.toString());
+
+        return task;
     }
 
     @Override
