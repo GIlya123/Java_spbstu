@@ -11,8 +11,8 @@ public interface TaskJpaRepository extends JpaRepository<Task, UUID> {
 
     List<Task> findByUserId(String userId);
 
-    @Query("select t from Task t where t.userId = ?1 and t.isCompleted = true and t.isDeleted = false")
-    List<Task> findByUserIdAndCompletedAndNotDeleted(String userId);
+    @Query("select t from Task t where t.userId = ?1 and t.isDeleted = false")
+    List<Task> findByUserIdAndNotDeleted(String userId);
 
     @Query("select t from Task t where t.userId = ?1 and t.isCompleted = false and t.isDeleted = false")
     List<Task> findByUserIdAndNotCompletedAndNotDeleted(String userId);
