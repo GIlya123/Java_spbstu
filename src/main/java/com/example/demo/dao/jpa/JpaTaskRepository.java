@@ -36,10 +36,17 @@ public class JpaTaskRepository implements TaskRepository {
     }
 
     @Override
+    @Transactional
     public void markAsDeleted(UUID taskId) {
         jpaRepository.findById(taskId).ifPresent(task -> {
             task.setDeleted(true);
             jpaRepository.save(task);
         });
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Task> findOverdue() {
+        return jpaRepository.findOverdue();
     }
 }

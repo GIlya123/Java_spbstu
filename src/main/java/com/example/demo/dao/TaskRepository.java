@@ -14,4 +14,6 @@ public interface TaskRepository {
     List<Task> findPendingByUserId(String userId);
 
     void markAsDeleted(UUID taskId);
+
+    List<Task> findOverdue();
 }

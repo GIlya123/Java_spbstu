@@ -66,7 +66,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional
     @CacheEvict(value = {"tasks", "tasks-pending"}, allEntries = true)
     public void markTaskAsDeleted(UUID taskId) {
         taskRepository.markAsDeleted(taskId);
