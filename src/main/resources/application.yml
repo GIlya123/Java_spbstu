@@ -5,9 +5,9 @@ spring:
 #    default: in-memory
     default: jpa
   datasource:
-    url: jdbc:postgresql://localhost:5432/demo_db
-    username: test
-    password: test
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/demo_db}
+    username: ${SPRING_DATASOURCE_USERNAME:test}
+    password: ${SPRING_DATASOURCE_PASSWORD:test}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

@@ -28,7 +28,7 @@ public class JpaTaskRepository implements TaskRepository {
     public List<Task> findAllByUserId(String userId, boolean includeDeleted) {
         return includeDeleted
                 ? jpaRepository.findByUserId(userId)
-                : jpaRepository.findByUserIdAndCompletedAndNotDeleted(userId);
+                : jpaRepository.findByUserIdAndNotDeleted(userId);
     }
 
     @Override
