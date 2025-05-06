@@ -13,6 +13,14 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - demo
+
   app:
     build:
       context: ..
@@ -22,11 +30,14 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+      - redis
     environment:
       SPRING_PROFILES_ACTIVE: jpa
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo_db
       SPRING_DATASOURCE_USERNAME: test
       SPRING_DATASOURCE_PASSWORD: test
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
     networks:
       - demo
 
