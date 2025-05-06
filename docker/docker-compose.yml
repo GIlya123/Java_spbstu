@@ -1,14 +1,17 @@
 services:
-  h2:
-    image: oscarfonts/h2
-    container_name: h2
-    ports:
-      - "1521:1521"
-      - "81:81"
+  postgres:
+    image: postgres:16
+    container_name: postgres
     environment:
-      H2_OPTIONS: "-tcp -tcpAllowOthers -ifNotExists"
+      POSTGRES_DB: demo_db
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"
     networks:
       - demo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   app:
     build:
@@ -18,14 +21,17 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - h2
+      - postgres
     environment:
       SPRING_PROFILES_ACTIVE: jpa
-      SPRING_DATASOURCE_URL: jdbc:h2:tcp://h2:1521/mem:demo_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo_db
       SPRING_DATASOURCE_USERNAME: test
       SPRING_DATASOURCE_PASSWORD: test
     networks:
       - demo
+
+volumes:
+  pgdata:
 
 networks:
   demo:
