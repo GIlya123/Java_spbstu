@@ -53,7 +53,7 @@ class TaskServiceImplTest {
         Task task = new Task();
         task.setUserId("user1");
 
-        when(taskRepository.findAllByUserId("user1", false)).thenReturn(List.of(task));
+        when(taskRepository.findAllByUserId("user1", true)).thenReturn(List.of(task));
 
         List<Task> result = taskService.getAllTasks("user1");
 
