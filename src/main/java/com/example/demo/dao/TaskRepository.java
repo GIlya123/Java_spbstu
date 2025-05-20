@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-
 import com.example.demo.model.entity.Task;
 
 import java.util.List;

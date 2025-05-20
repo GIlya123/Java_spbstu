@@ -1,4 +1,4 @@
-package com.example.demo.dao.impl;
+package com.example.demo.dao.inmemory;
 
 import com.example.demo.dao.UserRepository;
 import com.example.demo.model.entity.User;
