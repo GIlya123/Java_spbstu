@@ -5,7 +5,7 @@ COPY . /app
 
 RUN gradle build --no-daemon
 
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 

@@ -4,8 +4,11 @@ import com.example.demo.dao.TaskRepository;
 import com.example.demo.model.dto.TaskDto;
 import com.example.demo.model.entity.Task;
 import com.example.demo.service.impl.TaskServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,20 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TaskServiceImplTest {
 
+    @Mock
     private TaskRepository taskRepository;
-    private TaskServiceImpl taskService;
 
-    @BeforeEach
-    void setUp() {
-        taskRepository = mock(TaskRepository.class);
-        taskService = new TaskServiceImpl(taskRepository);
-    }
+    @InjectMocks
+    private TaskServiceImpl taskService;
 
     @Test
     void createTask() {

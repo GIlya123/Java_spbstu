@@ -29,4 +29,4 @@ docker-compose up --build
 
 - URL сервера: [http://localhost:8080](http://localhost:8080)
 - Профиль по умолчанию: 'jpa'
-- Консоль H2 доступна по адресу: [http://localhost:81](http://localhost:81) (имя пользователя и пароль: 'test')
+- Порт PostgreSQL БД (demo_db): 5432
