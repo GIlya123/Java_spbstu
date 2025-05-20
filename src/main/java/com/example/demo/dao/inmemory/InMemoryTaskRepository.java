@@ -5,6 +5,7 @@ import com.example.demo.model.entity.Task;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,12 @@ public class InMemoryTaskRepository implements TaskRepository {
         if (task != null) {
             task.setDeleted(true);
         }
+    }
+
+    @Override
+    public List<Task> findOverdue() {
+        return tasks.values().stream()
+                    .filter(t -> !t.isCompleted() && !t.isDeleted() && !t.getTargetDate().isAfter(LocalDateTime.now()))
+                    .collect(Collectors.toList());
     }
 }

@@ -16,4 +16,7 @@ public interface TaskJpaRepository extends JpaRepository<Task, UUID> {
 
     @Query("select t from Task t where t.userId = ?1 and t.isCompleted = false and t.isDeleted = false")
     List<Task> findByUserIdAndNotCompletedAndNotDeleted(String userId);
+
+    @Query("select t from Task t where t.isCompleted = false and t.isDeleted = false and t.targetDate <= current_timestamp")
+    List<Task> findOverdue();
 }
