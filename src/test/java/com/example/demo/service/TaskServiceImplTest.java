@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.TaskRepository;
+import com.example.demo.messaging.impl.ProducerImpl;
 import com.example.demo.model.dto.TaskDto;
 import com.example.demo.model.entity.Task;
 import com.example.demo.service.impl.TaskServiceImpl;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +28,8 @@ class TaskServiceImplTest {
 
     @Mock
     private TaskRepository taskRepository;
+    @Mock
+    private ProducerImpl producer;
 
     @InjectMocks
     private TaskServiceImpl taskService;
@@ -38,6 +42,7 @@ class TaskServiceImplTest {
         dto.setTargetDate(LocalDateTime.now().plusDays(1));
 
         when(taskRepository.save(any(Task.class))).thenAnswer(i -> i.getArguments()[0]);
+        doNothing().when(producer).send(any(String.class), any(String.class), any(String.class));
 
         Task result = taskService.createTask(dto);
 

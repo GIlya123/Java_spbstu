@@ -16,6 +16,9 @@ import java.time.Duration;
 @Configuration
 public class CacheConfig {
 
+    /**
+     * Конфигурация redis с настройкой сериализации
+     */
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
         ObjectMapper mapper = new ObjectMapper();
@@ -29,6 +32,10 @@ public class CacheConfig {
                                       .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer));
     }
 
+    /**
+     * @param cacheConfiguration конфиг redis
+     * @return конфиг с зарегистрированными линейками кэша
+     */
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer(RedisCacheConfiguration cacheConfiguration) {
         return (builder) -> builder

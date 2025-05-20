@@ -15,12 +15,18 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationRepository notificationRepository;
 
+    /**
+     * @return все оповещения для пользователя
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Notification> getAll(String userId) {
         return notificationRepository.findAllByUserId(userId);
     }
 
+    /**
+     * @return только непрочитанные оповещения
+     */
     @Override
     @Transactional(readOnly = true)
     public List<Notification> getPending(String userId) {

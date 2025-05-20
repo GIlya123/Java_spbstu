@@ -16,14 +16,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        User existingUser = users.get(user.getUsername());
-
-        if (existingUser == null) {
-            users.put(user.getUsername(), user);
-        } else {
-            throw new IllegalStateException("User exists: " + user.getUsername());
-        }
-
+        users.put(user.getUsername(), user);
         return user;
     }
 

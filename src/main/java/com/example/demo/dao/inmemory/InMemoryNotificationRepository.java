@@ -4,6 +4,7 @@ import com.example.demo.dao.NotificationRepository;
 import com.example.demo.model.entity.Notification;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,5 +28,11 @@ public class InMemoryNotificationRepository implements NotificationRepository {
         return notifications.stream()
                             .filter(n -> n.getUserId().equals(userId) && !n.isRead())
                             .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void save(Notification notification) {
+        notifications.add(notification);
     }
 }

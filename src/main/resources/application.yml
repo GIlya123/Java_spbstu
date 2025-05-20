@@ -2,8 +2,8 @@ spring:
   application:
     name: demo
   profiles:
-#    default: in-memory
-    default: jpa
+#    default: in-memory # без БД
+    default: jpa # с БД
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/demo_db}
     username: ${SPRING_DATASOURCE_USERNAME:test}
@@ -22,3 +22,13 @@ spring:
     redis:
       host: ${SPRING_DATA_REDIS_HOST:localhost}
       port: ${SPRING_DATA_REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP-SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest # при подключении берем сначала старые сообщения, потом новые
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

@@ -30,3 +30,6 @@ docker-compose up --build
 - URL сервера: [http://localhost:8080](http://localhost:8080)
 - Профиль по умолчанию: 'jpa'
 - Порт PostgreSQL БД (demo_db): 5432
+- Порт Redis: 6379
+- Порт Kafka: 9092
+- Порт ZooKeeper: 2181

@@ -9,4 +9,6 @@ public interface NotificationRepository {
     List<Notification> findAllByUserId(String userId);
 
     List<Notification> findPendingByUserId(String userId);
+
+    void save(Notification notification);
 }
